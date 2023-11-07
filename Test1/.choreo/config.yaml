@@ -1,0 +1,22 @@
+apiVersion: core.choreo.dev/v1alpha1
+kind: ComponentConfig
+metadata:
+  name: product
+  projectName: pet-store
+  annotations:
+    componentType: service
+spec:
+  inbound:
+  - name: product
+    port: 9090
+    type: REST
+    visibility: Public
+    context: /
+  outbound:
+    serviceReferences:
+    - name: choreo:///madusha/lpar/auvzlk/40c92b81-2ddd-4933-9422-a920b7e27736/v1.0/inventory/public
+      dependentConfig: config-1
+      connectionType: service
+    - name: product-db
+      dependentConfig: config-1
+      connectionType: datastore
